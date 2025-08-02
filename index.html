@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Pro - SkillCraft Technology</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <!-- Cover Page -->
+    <div id="coverPage" class="cover-page">
+        <div class="cover-container">
+            <div class="cover-logo">
+                <div class="logo-animation">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h1 class="cover-title">Tic Tac Toe Pro</h1>
+                <p class="cover-subtitle">Professional Gaming Experience</p>
+                <div class="skillcraft-branding">
+                    <span>Powered by</span>
+                    <strong>SkillCraft Technology</strong>
+                </div>
+            </div>
+            
+            <div class="cover-features">
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <span>Smart AI Opponents</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Advanced Statistics</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Interactive Tutorial</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-palette"></i>
+                    <span>Professional Themes</span>
+                </div>
+            </div>
+            
+            <div class="cover-actions">
+                <button id="enterGame" class="enter-btn">
+                    <i class="fas fa-play"></i>
+                    <span>Enter Game</span>
+                    <div class="btn-glow"></div>
+                </button>
+                <p class="version-info">Version 2.0 Pro Edition</p>
+            </div>
+            
+            <div class="developer-credit">
+                <p>Developed by <strong>Vanshika</strong> | SkillCraft Technology Internship</p>
+            </div>
+        </div>
+        
+        <div class="cover-background-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+    
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen" style="display: none;">
+        <div class="welcome-container">
+            <div class="welcome-header">
+                <h1><i class="fas fa-gamepad"></i> Tic Tac Toe Pro</h1>
+                <p>Advanced Gaming Experience by SkillCraft Technology</p>
+                <div class="version-badge">v2.0 Pro</div>
+            </div>
+            
+            <div class="player-setup">
+                <h3><i class="fas fa-user-edit"></i> Player Setup</h3>
+                <div class="input-group">
+                    <label for="player1Name">
+                        <i class="fas fa-user"></i> Player 1 Name (X):
+                    </label>
+                    <input type="text" id="player1Name" placeholder="Enter your name" maxlength="15">
+                </div>
+                <div class="input-group" id="player2Setup">
+                    <label for="player2Name">
+                        <i class="fas fa-user-friends"></i> Player 2 Name (O):
+                    </label>
+                    <input type="text" id="player2Name" placeholder="Enter player 2 name" maxlength="15">
+                </div>
+            </div>
+            
+            <div class="game-mode-setup">
+                <h3><i class="fas fa-cogs"></i> Game Mode</h3>
+                <div class="mode-selector">
+                    <button id="welcomePvP" class="welcome-mode-btn active">
+                        <i class="fas fa-users"></i>
+                        <span>Player vs Player</span>
+                        <small>Play with a friend</small>
+                    </button>
+                    <button id="welcomePvC" class="welcome-mode-btn">
+                        <i class="fas fa-robot"></i>
+                        <span>vs Computer</span>
+                        <small>Challenge the AI</small>
+                    </button>
+                    <button id="welcomeTutorial" class="welcome-mode-btn">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Tutorial</span>
+                        <small>Learn how to play</small>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="difficulty-setup" id="welcomeDifficulty" style="display: none;">
+                <h4><i class="fas fa-brain"></i> AI Difficulty</h4>
+                <div class="difficulty-selector">
+                    <button class="diff-btn" data-difficulty="easy">
+                        <i class="fas fa-smile"></i> Easy
+                    </button>
+                    <button class="diff-btn active" data-difficulty="medium">
+                        <i class="fas fa-meh"></i> Medium
+                    </button>
+                    <button class="diff-btn" data-difficulty="hard">
+                        <i class="fas fa-fire"></i> Hard
+                    </button>
+                </div>
+            </div>
+            
+            <div class="welcome-actions">
+                <button id="startGame" class="start-btn">
+                    <i class="fas fa-play"></i> Start Game
+                </button>
+                <button id="showRules" class="rules-btn">
+                    <i class="fas fa-book-open"></i> View Rules
+                </button>
+                <button id="showStats" class="stats-btn">
+                    <i class="fas fa-chart-bar"></i> Statistics
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rules Modal -->
+    <div id="rulesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-book-open"></i> How to Play Tic Tac Toe Pro</h2>
+                <button class="close-btn" id="closeRules">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="rules-section">
+                    <h3><i class="fas fa-target"></i> Objective</h3>
+                    <p>Be the first player to get 3 of your marks in a row (horizontally, vertically, or diagonally).</p>
+                </div>
+                
+                <div class="rules-section">
+                    <h3><i class="fas fa-play-circle"></i> How to Play</h3>
+                    <ol>
+                        <li>Players take turns placing their marks (X or O) on the 3x3 grid</li>
+                        <li>Player X always goes first</li>
+                        <li>Click on any empty square to place your mark</li>
+                        <li>First to get 3 in a row wins!</li>
+                        <li>If all squares are filled with no winner, it's a draw</li>
+                    </ol>
+                </div>
+                
+                <div class="rules-section">
+                    <h3><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h3>
+                    <div class="shortcuts-grid">
+                        <div class="shortcut">
+                            <kbd>1-9</kbd>
+                            <span>Place mark on board position</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>R</kbd>
+                            <span>Reset current game</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Ctrl+U</kbd>
+                            <span>Undo last move</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Ctrl+S</kbd>
+                            <span>Open settings</span>
+                        </div>
+                        <div class="shortcut">
+                            <kbd>Esc</kbd>
+                            <span>Close menus</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rules-section">
+                    <h3><i class="fas fa-robot"></i> AI Difficulty Levels</h3>
+                    <div class="difficulty-info">
+                        <div class="diff-info">
+                            <i class="fas fa-smile"></i>
+                            <strong>Easy:</strong> AI makes random moves with occasional strategy
+                        </div>
+                        <div class="diff-info">
+                            <i class="fas fa-meh"></i>
+                            <strong>Medium:</strong> Balanced strategic play with smart blocking
+                        </div>
+                        <div class="diff-info">
+                            <i class="fas fa-fire"></i>
+                            <strong>Hard:</strong> Optimal play using advanced algorithms
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="startTutorial" class="btn tutorial-btn">
+                    <i class="fas fa-graduation-cap"></i> Start Interactive Tutorial
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tutorial Overlay -->
+    <div id="tutorialOverlay" class="tutorial-overlay" style="display: none;">
+        <div class="tutorial-content">
+            <div class="tutorial-step" id="tutorialStep">
+                <h3 id="tutorialTitle">Welcome to Tutorial!</h3>
+                <p id="tutorialText">Let's learn how to play Tic Tac Toe Pro step by step.</p>
+                <div class="tutorial-controls">
+                    <button id="tutorialPrev" class="btn secondary" disabled>
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <span id="tutorialProgress">1 / 5</span>
+                    <button id="tutorialNext" class="btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" id="gameContainer" style="display: none;">
+        <header class="game-header">
+            <div class="player-info">
+                <div class="player-display">
+                    <i class="fas fa-user"></i>
+                    <span id="currentPlayerName">Player 1</span>
+                </div>
+                <button id="backToMenu" class="back-btn">
+                    <i class="fas fa-home"></i> Menu
+                </button>
+            </div>
+            <h1><i class="fas fa-gamepad"></i> Tic Tac Toe Pro</h1>
+            <div class="game-info">
+                <span class="round-info">Round <span id="roundNumber">1</span></span>
+                <span class="mode-info" id="currentMode">Player vs Player</span>
+            </div>
+        </header>
+        
+        <!-- Game Mode Selection -->
+        <div class="game-mode">
+            <button id="playerVsPlayer" class="mode-btn active">
+                <i class="fas fa-users"></i> Player vs Player
+            </button>
+            <button id="playerVsComputer" class="mode-btn">
+                <i class="fas fa-robot"></i> Player vs Computer
+            </button>
+        </div>
+
+        <!-- Difficulty Selection (for Computer mode) -->
+        <div class="difficulty-selection" id="difficultySelection" style="display: none;">
+            <h4><i class="fas fa-brain"></i> AI Difficulty:</h4>
+            <div class="difficulty-buttons">
+                <button id="easyMode" class="difficulty-btn active">
+                    <i class="fas fa-smile"></i> Easy
+                </button>
+                <button id="mediumMode" class="difficulty-btn">
+                    <i class="fas fa-meh"></i> Medium
+                </button>
+                <button id="hardMode" class="difficulty-btn">
+                    <i class="fas fa-fire"></i> Hard
+                </button>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel">
+            <button id="settingsToggle" class="settings-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="settings-dropdown" id="settingsDropdown">
+                <div class="setting-item">
+                    <label for="soundToggle">
+                        <i class="fas fa-volume-up"></i> Sound Effects
+                    </label>
+                    <input type="checkbox" id="soundToggle" checked>
+                </div>
+                <div class="setting-item">
+                    <label for="animationsToggle">
+                        <i class="fas fa-magic"></i> Animations
+                    </label>
+                    <input type="checkbox" id="animationsToggle" checked>
+                </div>
+                <div class="setting-item">
+                    <label for="themeToggle">
+                        <i class="fas fa-palette"></i> Dark Theme
+                    </label>
+                    <input type="checkbox" id="themeToggle">
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Status -->
+        <div class="game-status">
+            <div class="status-header">
+                <p id="status"><i class="fas fa-play"></i> <span id="statusPlayerName">Player 1</span>'s Turn</p>
+                <div class="game-timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="gameTimer">00:00</span>
+                </div>
+            </div>
+            
+            <div class="players-board">
+                <div class="player-card" id="player1Card">
+                    <div class="player-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="player-details">
+                        <span class="player-name" id="displayPlayer1Name">Player 1</span>
+                        <span class="player-symbol">X</span>
+                        <span class="player-score" id="player1Score">0 wins</span>
+                    </div>
+                </div>
+                
+                <div class="vs-indicator">
+                    <span>VS</span>
+                </div>
+                
+                <div class="player-card" id="player2Card">
+                    <div class="player-avatar">
+                        <i id="player2Avatar" class="fas fa-user"></i>
+                    </div>
+                    <div class="player-details">
+                        <span class="player-name" id="displayPlayer2Name">Player 2</span>
+                        <span class="player-symbol">O</span>
+                        <span class="player-score" id="player2Score">0 wins</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="match-stats">
+                <div class="stat">
+                    <i class="fas fa-handshake"></i>
+                    <span>Draws: <span id="scoreDraw">0</span></span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-trophy"></i>
+                    <span>Streak: <span id="streak">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board" id="gameBoard">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="controls">
+            <button id="resetGame" class="btn">
+                <i class="fas fa-redo"></i> New Round
+            </button>
+            <button id="undoMove" class="btn undo" disabled>
+                <i class="fas fa-undo"></i> Undo
+            </button>
+            <button id="pauseGame" class="btn secondary">
+                <i class="fas fa-pause"></i> Pause
+            </button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button id="quickRestart" class="quick-btn" title="Quick Restart (R)">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+            <button id="quickSettings" class="quick-btn" title="Settings (Ctrl+S)">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button id="quickHelp" class="quick-btn" title="Help">
+                <i class="fas fa-question-circle"></i>
+            </button>
+        </div>
+
+        <!-- Statistics Panel -->
+        <div class="stats-panel">
+            <h3><i class="fas fa-chart-line"></i> Game Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalGames">0</div>
+                    <div class="stat-label">Total Games</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="winRate">0%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="avgTime">0s</div>
+                    <div class="stat-label">Avg Game Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="streak">0</div>
+                    <div class="stat-label">Win Streak</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Rules -->
+        <div class="rules">
+            <h3><i class="fas fa-info-circle"></i> How to Play:</h3>
+            <div class="rules-content">
+                <div class="rule-item">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <span>Choose your game mode and difficulty level</span>
+                </div>
+                <div class="rule-item">
+                    <i class="fas fa-hand-pointer"></i>
+                    <span>Click on empty squares to place your mark</span>
+                </div>
+                <div class="rule-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Get 3 in a row to win (horizontal, vertical, or diagonal)</span>
+                </div>
+                <div class="rule-item">
+                    <i class="fas fa-keyboard"></i>
+                    <span>Use number keys 1-9 or click to play</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement Notifications -->
+        <div id="achievementNotification" class="achievement-notification">
+            <i class="fas fa-trophy"></i>
+            <span id="achievementText"></span>
+        </div>
+
+        <!-- Match Results Modal -->
+        <div id="matchResultModal" class="modal result-modal">
+            <div class="modal-content">
+                <div class="result-header">
+                    <div class="result-icon" id="resultIcon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h2 id="resultTitle">🎉 Congratulations!</h2>
+                    <p id="resultMessage">You won this round!</p>
+                </div>
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <span>Game Time</span>
+                        <strong id="resultTime">45s</strong>
+                    </div>
+                    <div class="result-stat">
+                        <span>Moves Played</span>
+                        <strong id="resultMoves">7</strong>
+                    </div>
+                    <div class="result-stat">
+                        <span>Win Streak</span>
+                        <strong id="resultStreak">3</strong>
+                    </div>
+                </div>
+                <div class="result-actions">
+                    <button id="playAgain" class="btn">
+                        <i class="fas fa-redo"></i> Play Again
+                    </button>
+                    <button id="backToMenuFromResult" class="btn secondary">
+                        <i class="fas fa-home"></i> Main Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pause Menu -->
+        <div id="pauseModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-pause"></i> Game Paused</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Take your time! The game is paused.</p>
+                    <div class="pause-stats">
+                        <div class="pause-stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Time Elapsed: <span id="pausedTime">00:00</span></span>
+                        </div>
+                        <div class="pause-stat">
+                            <i class="fas fa-chess"></i>
+                            <span>Moves Made: <span id="pausedMoves">0</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="resumeGame" class="btn">
+                        <i class="fas fa-play"></i> Resume Game
+                    </button>
+                    <button id="restartFromPause" class="btn secondary">
+                        <i class="fas fa-redo"></i> Restart Round
+                    </button>
+                    <button id="exitToMenu" class="btn secondary">
+                        <i class="fas fa-home"></i> Exit to Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="game-footer">
+            <p>© 2025 SkillCraft Technology | Developed by <span id="developerName">Vanshika</span></p>
+            <div class="footer-links">
+                <button id="aboutGame" class="footer-link">About</button>
+                <button id="reportBug" class="footer-link">Report Bug</button>
+                <button id="shareGame" class="footer-link">Share</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Audio Elements for Sound Effects -->
+    <audio id="moveSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSs=" type="audio/wav">
+    </audio>
+    <audio id="winSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYfByqO0vTNeSs=" type="audio/wav">
+    </audio>
+
+    <script src="game-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
